@@ -1,30 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 const createThemeColorReplacerPlugin = require('./config/plugin.config')
-
+const Proxy = require('./config/proxy.config')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
-
-// const isProd = process.env.NODE_ENV === 'production'
-
-// const assetsCDN = {
-//   // webpack build externals
-//   externals: {
-//     vue: 'Vue',
-//     'vue-router': 'VueRouter',
-//     vuex: 'Vuex',
-//     axios: 'axios'
-//   },
-//   css: [],
-//   // https://unpkg.com/browse/vue@2.6.10/
-//   js: [
-//     '//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
-//     '//cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js',
-//     '//cdn.jsdelivr.net/npm/vuex@3.1.1/dist/vuex.min.js',
-//     '//cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js'
-//   ]
-// }
 
 // vue.config.js
 const vueConfig = {
@@ -32,7 +13,13 @@ const vueConfig = {
     // webpack plugins
     plugins: [
       // Ignore all locale files of moment.js
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new CopyWebpackPlugin([
+        {
+          from: path.join(__dirname,'./src/static'),
+          to: 'static'
+        } 
+      ])
     ],
     // if prod, add externals
     // externals: isProd ? assetsCDN.externals : {}
@@ -40,7 +27,13 @@ const vueConfig = {
   },
 
   chainWebpack: (config) => {
-    config.resolve.alias.set('@$', resolve('src'))
+    config.resolve.alias
+      .set('@$', resolve('src'))
+      .set('@tools', resolve('src/tools'))
+      .set('@service', resolve('src/service'))
+      .set('@comp', resolve('src/components'))
+      .set('@config', resolve('src/config'))
+      .set('@util', resolve('src/utils'))
 
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
@@ -85,45 +78,9 @@ const vueConfig = {
 
   devServer: {
     // development server port 8000
-    port: 8000,
-    proxy: {
-      '/iop/auth': {
-        target: 'http://118.190.199.44:9020/',
-        // target: 'http://192.168.0.106:8020/'
-      },
-      '/iop/system': {
-        target: 'http://118.190.199.44:9030/'
-        // target: 'http://192.168.0.106:8030/'
-      },
-      '/iop/base': {
-        target: 'http://118.190.199.44:9030/'
-        // target: 'http://192.168.0.106:8030/'
-      },
-      '/iop/file': {
-        target: 'http://118.190.199.44:9040/'
-      },
-      '/iop/drms': {
-        target: 'http://118.190.199.44:9070/'
-      },
-      '/msg': {
-        target: 'http://118.190.199.44:9090/'
-      },
-      '/iop/serv': {
-        target: 'http://118.190.199.44:9050/'
-      },
-      /** 流程 */
-      '/iop/bpms': {
-        target: 'http://118.190.199.44:8050/'
-      },
-      /** 授权 */
-      '/iop/permit': {
-        target: 'http://118.190.199.44:9080/'
-      },
-      /** 工具 */
-      '/iop/tools': {
-        target: 'http://118.190.199.44:8070/'
-      }
-    },
+    port: 8600,
+    proxy: Proxy,
+    disableHostCheck:true,
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
