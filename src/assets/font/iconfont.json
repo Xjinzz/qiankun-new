@@ -1,0 +1,79 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15950246",
+      "name": "shuc",
+      "font_class": "shuc",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "15950247",
+      "name": "shub",
+      "font_class": "shub",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "15950248",
+      "name": "shua",
+      "font_class": "shua",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "17427323",
+      "name": "wenj",
+      "font_class": "wenj",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "17427324",
+      "name": "ren3",
+      "font_class": "ren3",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "17427325",
+      "name": "ren2",
+      "font_class": "ren2",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "17441263",
+      "name": "zi",
+      "font_class": "zi",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "17455541",
+      "name": "jigou",
+      "font_class": "jigou",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "17455542",
+      "name": "danw",
+      "font_class": "danw",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "17455543",
+      "name": "gongwen",
+      "font_class": "gongwen",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    }
+  ]
+}

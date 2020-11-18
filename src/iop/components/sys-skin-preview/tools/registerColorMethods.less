@@ -1,0 +1,65 @@
+@import "./enum.less";
+.registerColorMethods() {
+  @functions: ~`(function() {
+    const key = @{colorThemeListForJS}
+    this.getColor = function (type, val) {
+      const colorMap = {
+        [key[0]]: @{light-color-dusk},
+        [key[1]]: @{light-color-volcano},
+        [key[2]]: @{light-color-nightfall},
+        [key[3]]: @{light-color-mingqing},
+        [key[4]]: @{light-color-auroraGreen},
+        [key[5]]: @{light-color-dawn},
+        [key[6]]: @{light-color-geekBlue},
+        [key[7]]: @{light-color-purple},
+      }
+      return type == 'light' ? colorMap[val] : @{dark-color}
+    }
+    // 获取通用背景色
+    this.getBack = function (type, val) {
+      // 浅色调
+      const backMap = {
+        light: {
+          [key[0]]: @{light-back-dusk},
+          [key[1]]: @{light-back-volcano},
+          [key[2]]: @{light-back-nightfall},
+          [key[3]]: @{light-back-mingqing},
+          [key[4]]: @{light-back-auroraGreen},
+          [key[5]]: @{light-back-dawn},
+          [key[6]]: @{light-back-geekBlue},
+          [key[7]]: @{light-back-purple},
+        },
+        dark: {
+          [key[0]]: @{dark-back-dusk},
+          [key[1]]: @{dark-back-volcano},
+          [key[2]]: @{dark-back-nightfall},
+          [key[3]]: @{dark-back-mingqing},
+          [key[4]]: @{dark-back-auroraGreen},
+          [key[5]]: @{dark-back-dawn},
+          [key[6]]: @{dark-back-geekBlue},
+          [key[7]]: @{dark-back-purple},
+        }
+      }
+      return backMap[type][val]
+    }
+    // 获取菜单背景色
+    this.getMenusBack = function (type, val) {
+      // 浅色调
+      const menusBackMap = {
+        [key[0]]: @{dark-back-dusk},
+        [key[1]]: @{dark-back-volcano},
+        [key[2]]: @{dark-back-nightfall},
+        [key[3]]: @{dark-back-mingqing},
+        [key[4]]: @{dark-back-auroraGreen},
+        [key[5]]: @{dark-back-dawn},
+        [key[6]]: @{dark-back-geekBlue},
+        [key[7]]: @{dark-back-purple},
+      }
+      return type == 'light' ? @{dark-color} : menusBackMap[val]
+    }
+    this.getPubColor = function(type) {
+      return type == 'light' ? 'rgba(0, 0, 0, 0.65)' : 'rgba(255, 255, 255, 0.85)'
+    }
+  })()`;
+}
+.registerColorMethods();

@@ -1,0 +1,110 @@
+@import "./enum.less";
+.color-loop(@type, @list, @i: 1, @val: extract(@list, @i)) when (length(@list) >= @i) {
+  &.pre-color-@{val} {
+    color: ~`getColor('light', '@{val}')`;
+    // 横向
+    &.pre-layout-horizontal{
+      /deep/ h1 {
+        color: ~`getPubColor('@{type}')`;
+      }
+      /deep/ .pub-header-content {
+        color: ~`getPubColor('@{type}')`;
+      }
+    }
+    // 纵向
+    &.pre-layout-inline{
+      /deep/ h1 {
+        font-weight:800;
+        color: ~`getColor('light', '@{val}')`;
+      }
+      /deep/ .pub-header-content {
+        color: ~`getPubColor('light')`;
+      }
+    }
+    /deep/ .ant-menu {
+      // width:100%;
+      // 菜单纵向选中项样式
+      /deep/ .ant-menu-item-selected:not(.ant-menu-submenu-horizontal){
+        color: ~`getColor('@{type}', '@{val}')`;
+        background-color: ~`getMenusBack('@{type}', '@{val}')`;
+      }
+      // 菜单横向选中项下方的border
+      /deep/ &.ant-menu-inline .ant-menu-item::after {
+        border-color: ~`getColor('light', '@{val}')`;
+      }
+      // 选中
+      > .ant-menu-item-selected,
+      // 当前选中
+      > .ant-menu-item-active,
+      // 展开
+      > .ant-menu-item-open,
+      // 子菜单当前选中
+      > .ant-menu-submenu-active,
+      // 子菜单展开
+      > .ant-menu-submenu-open,
+      // 菜单标题滑过
+      > .ant-menu-submenu .ant-menu-submenu-title:hover{
+        color: ~`getColor('@{type}', '@{val}')`;
+        border-color: ~`getColor('@{type}', '@{val}')`;
+      }
+      // 非深色调的一些特殊设置
+      /deep/ &:not(.ant-menu-dark) {
+        > .ant-menu-item:hover,
+        > .ant-menu-submenu-selected,
+        > .ant-menu-submenu:hover {
+          color: ~`getColor('@{type}', '@{val}')`;
+          border-color: ~`getColor('@{type}', '@{val}')`;
+        }
+      }
+    }
+    // 内容顶部
+    /deep/ .skinpreview-content-header {
+      // tab当前选中
+      .ant-tabs .ant-tabs-card-bar .ant-tabs-tab-active {
+        color: ~`getColor('light', '@{val}')`;
+      }
+      // tab滑过
+      .ant-tabs-nav .ant-tabs-tab:hover {
+        color: ~`getColor('light', '@{val}')`;
+      }
+    }
+    // 内容区域主体
+    /deep/ .skinpreview-content-continer {
+      // 搜索按钮
+      .ant-btn-primary {
+        color: #fff!important;
+        background: ~`getColor('light', '@{val}')`;
+        border-color: ~`getColor('light', '@{val}')`;
+      }
+      // 分页器
+      .ant-pagination-item-active,
+      // input
+      .ant-input:focus,
+      .ant-input:hover,
+      // button
+      .ant-btn:hover,
+      .ant-btn:focus {
+        color: ~`getColor('light', '@{val}')`;
+        border-color: ~`getColor('light', '@{val}')`;
+      }
+    }
+    // table滑过
+    /deep/ .ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+      background-color: ~`getBack('light', '@{val}')`;
+    }
+    // 文本选中样式
+    /deep/ ::selection {
+      background: ~`getColor('light', '@{val}')`;
+    }
+    // a标签
+    /deep/ a {
+      color: ~`getColor('light', '@{val}')`;
+    }
+  }
+  
+  .color-loop(@type, @list,(@i+1));
+}
+// 汇入所有样式
+.color-mixin (@type) {
+  .color-loop(@type, @colorThemeList)
+}
